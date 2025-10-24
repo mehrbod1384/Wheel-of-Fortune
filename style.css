@@ -1,0 +1,42 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(32, 32, 32);
+  /* width: 120rem; */
+  margin: 5rem 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 100rem;
+  display: flex;
+  justify-content: center;
+}
+
+.canvas {
+  width: 80vb;
+}
+
+.spin-btn {
+  background-color: rgb(1, 15, 43);
+  color: azure;
+  border: none;
+  font-size: 3rem;
+  padding: 1rem 2rem;
+  margin: 5rem 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.spin-btn:hover {
+  background-color: rgb(3, 35, 99);
+}
