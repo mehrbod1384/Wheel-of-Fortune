@@ -77,11 +77,29 @@ const animation = function () {
     if (Math.abs(angularVelocity) < 0.0001) {
       spining = false;
       angularVelocity = 0;
+      reward();
     }
   }
 
   drawWheel();
   requestAnimationFrame(animation);
+};
+
+const reward = function () {
+  const segAngle = (Math.PI * 2) / segCount;
+
+  // زاویه‌ی مبنا را به ۹۰ درجه (سمت راست) تغییر دادیم
+  const offset = Math.PI / 2;
+  const normalizedAngle =
+    (((-angle + offset + Math.PI * 2) % (Math.PI * 2)) + Math.PI * 2) %
+    (Math.PI * 2);
+
+  // محاسبه‌ی ایندکس بخش برنده
+  let index = Math.floor(normalizedAngle / segAngle);
+  index = (segCount - index) % segCount;
+
+  // نمایش برنده
+  setTimeout(() => alert(segments[index]), 200);
 };
 
 spinBtn.addEventListener("click", function () {
