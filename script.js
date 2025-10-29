@@ -96,7 +96,11 @@ const reward = function () {
 
   // محاسبه‌ی ایندکس بخش برنده
   let index = Math.floor(normalizedAngle / segAngle);
-  index = (segCount - index) % segCount;
+
+  index =
+    index > 2
+      ? ((segCount + index) % segCount) - 2
+      : (segCount + (index + 6)) % segCount;
 
   // نمایش برنده
   setTimeout(() => alert(segments[index]), 200);
