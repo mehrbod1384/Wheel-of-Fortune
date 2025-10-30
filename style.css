@@ -23,20 +23,34 @@ body {
 
 .canvas {
   width: 80vb;
+  border: 10px solid rgb(0, 0, 0);
+  border-radius: 100%;
 }
 
 .spin-btn {
-  background-color: rgb(1, 15, 43);
+  width: 10rem;
+  height: 10rem;
+  position: absolute;
+  top: 40%;
+  transform: translate(0, -50%);
+  background-color: rgb(1, 6, 15);
   color: azure;
   border: none;
   font-size: 3rem;
   padding: 1rem 2rem;
   margin: 5rem 0;
-  border-radius: 1rem;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.5s;
 }
 
+.spin-btn svg {
+  width: 7rem;
+  height: 7rem;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
 .spin-btn:hover {
-  background-color: rgb(3, 35, 99);
+  background-color: rgb(41, 40, 40);
 }

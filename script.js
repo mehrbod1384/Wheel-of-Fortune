@@ -9,12 +9,13 @@ const segments = [
   "پوچ",
   "شانس مجدد",
   "300 سکه",
-  "جاییزه ویزه",
+  "جاییزه ویژه",
   "پوچ",
-  "سایت",
+  "ساعت",
   "400 سکه",
 ];
 const segCount = segments.length;
+const segAngle = (Math.PI * 2) / segCount;
 
 const cx = canvas.width / 2;
 const cy = canvas.height / 2;
@@ -26,7 +27,6 @@ let spining = false;
 
 const drawWheel = function () {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const segAngle = (Math.PI * 2) / segCount;
 
   for (let i = 0; i < segCount; i++) {
     const start = angle + i * segAngle;
@@ -66,6 +66,14 @@ const drawWheel = function () {
   ctx.lineTo(cx * 2, cy + 25);
   ctx.lineTo(cx * 2, cy - 25);
   ctx.fill();
+
+  ctx.save();
+  ctx.fillStyle = "rgb(41, 40, 40)";
+  ctx.beginPath();
+  ctx.moveTo(cx * 2 - 30, cy);
+  ctx.lineTo(cx * 2, cy + 15);
+  ctx.lineTo(cx * 2, cy - 15);
+  ctx.fill();
 };
 
 const animation = function () {
@@ -77,7 +85,7 @@ const animation = function () {
     if (Math.abs(angularVelocity) < 0.0001) {
       spining = false;
       angularVelocity = 0;
-      reward();
+      displayReward();
     }
   }
 
@@ -85,9 +93,7 @@ const animation = function () {
   requestAnimationFrame(animation);
 };
 
-const reward = function () {
-  const segAngle = (Math.PI * 2) / segCount;
-
+const displayReward = function () {
   // زاویه‌ی مبنا را به ۹۰ درجه (سمت راست) تغییر دادیم
   const offset = Math.PI / 2;
   const normalizedAngle =
@@ -97,10 +103,7 @@ const reward = function () {
   // محاسبه‌ی ایندکس بخش برنده
   let index = Math.floor(normalizedAngle / segAngle);
 
-  index =
-    index > 2
-      ? ((segCount + index) % segCount) - 2
-      : (segCount + (index + 6)) % segCount;
+  index = index > 1 ? index - 2 : index + 6;
 
   // نمایش برنده
   setTimeout(() => alert(segments[index]), 200);
