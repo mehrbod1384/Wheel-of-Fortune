@@ -3,6 +3,7 @@
 const canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext("2d");
 const spinBtn = document.querySelector(".spin-btn");
+const spinSound = new Audio("./sound effects/wheel-spin.mp3");
 
 const segments = [
   "کتاب",
@@ -81,6 +82,9 @@ const animation = function () {
     // کاهش تدریجی سرعت
     angularVelocity *= 0.995;
     angle += angularVelocity;
+    spinSound.play();
+
+    if (Math.abs(angularVelocity) < 0.005) spinSound.pause();
 
     if (Math.abs(angularVelocity) < 0.0001) {
       spining = false;
