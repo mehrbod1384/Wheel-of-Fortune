@@ -3,7 +3,7 @@
 const canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext("2d");
 const spinBtn = document.querySelector(".spin-btn");
-const spinSound = new Audio("./sound effects/wheel-spin.mp3");
+const tickSound = new Audio("./sound effects/tick.mp3");
 
 const segments = [
   "کتاب",
@@ -24,6 +24,7 @@ const radius = 250;
 
 let angle = 0; // زاویه فعلی
 let angularVelocity = 0;
+let lastTickSegment = 0;
 let spining = false;
 
 const drawWheel = function () {
@@ -82,9 +83,15 @@ const animation = function () {
     // کاهش تدریجی سرعت
     angularVelocity *= 0.995;
     angle += angularVelocity;
-    spinSound.play();
 
-    if (Math.abs(angularVelocity) < 0.005) spinSound.pause();
+    const currentSegment = Math.floor((angle % (Math.PI * 2)) / segAngle);
+    if (currentSegment !== lastTickSegment) {
+      // وارد بخش جدید شد صدای تیک زده بشه
+      tickSound.currentTime = 0;
+      tickSound.play();
+
+      lastTickSegment = currentSegment;
+    }
 
     if (Math.abs(angularVelocity) < 0.0001) {
       spining = false;
@@ -115,7 +122,7 @@ const displayReward = function () {
 
 spinBtn.addEventListener("click", function () {
   if (!spining) {
-    angularVelocity = Math.random() * 0.4; // سرعت اولیه
+    angularVelocity = Math.random() * 0.22; // سرعت اولیه
     spining = true;
   }
 });
