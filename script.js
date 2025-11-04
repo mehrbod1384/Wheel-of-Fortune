@@ -3,6 +3,11 @@
 const canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext("2d");
 const spinBtn = document.querySelector(".spin-btn");
+const light1 = document.querySelector(".light-1");
+const light2 = document.querySelector(".light-2");
+const light3 = document.querySelector(".light-3");
+const light4 = document.querySelector(".light-4");
+const light5 = document.querySelector(".light-5");
 const tickSound = new Audio("./sound effects/tick.mp3");
 
 const segments = [
@@ -26,6 +31,8 @@ let angle = 0; // زاویه فعلی
 let angularVelocity = 0;
 let lastTickSegment = 0;
 let pinShake = 0;
+let operrtunityLeft = 5;
+let noOperrtunity = false;
 let spining = false;
 
 const drawWheel = function () {
@@ -84,6 +91,7 @@ const animation = function () {
     angularVelocity *= 0.995;
     angle += angularVelocity;
 
+    // پخش صدای تیک
     const currentSegment = Math.floor((angle % (Math.PI * 2)) / segAngle);
     if (currentSegment !== lastTickSegment) {
       tickSound.currentTime = 0;
@@ -118,13 +126,51 @@ const displayReward = function () {
   index = index > 1 ? index - 2 : index + 6;
 
   // نمایش برنده
-  setTimeout(() => alert(segments[index]), 200);
+  noOperrtunity === false
+    ? setTimeout(() => alert(segments[index]), 200)
+    : alert("10 ثانیه منتظر بمانید");
+};
+
+const oppertunityLights = function () {
+  operrtunityLeft--;
+
+  if (operrtunityLeft === 4) light1.style.backgroundColor = "red";
+  if (operrtunityLeft === 3) light2.style.backgroundColor = "red";
+  if (operrtunityLeft === 2) light3.style.backgroundColor = "red";
+  if (operrtunityLeft === 1) light4.style.backgroundColor = "red";
+  if (operrtunityLeft === 0) light5.style.backgroundColor = "red";
+  if (operrtunityLeft < 0) noOperrtunity = true;
+  if (noOperrtunity) spining = true;
+};
+
+const newGame = function () {
+  if (spining) {
+    setTimeout(() => {
+      spining = false;
+      noOperrtunity = false;
+      operrtunityLeft = 5;
+
+      alert("دوباره بازی کنید");
+
+      light1.style.backgroundColor = "green";
+      light2.style.backgroundColor = "green";
+      light3.style.backgroundColor = "green";
+      light4.style.backgroundColor = "green";
+      light5.style.backgroundColor = "green";
+    }, 10000);
+  }
 };
 
 spinBtn.addEventListener("click", function () {
-  if (!spining) {
-    angularVelocity = Math.random() * 0.22; // سرعت اولیه
-    spining = true;
+  if (Math.abs(angularVelocity) < 0.0001) {
+    oppertunityLights();
+
+    newGame();
+
+    if (!spining) {
+      angularVelocity = Math.random() * (0.2 - 0.1) + 0.01; // سرعت اولیه
+      spining = true;
+    }
   }
 });
 

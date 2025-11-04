@@ -10,7 +10,6 @@ html {
 
 body {
   background-color: rgb(32, 32, 32);
-  /* width: 120rem; */
   margin: 5rem 0;
 }
 
@@ -53,4 +52,55 @@ body {
 
 .spin-btn:hover {
   background-color: rgb(41, 40, 40);
+}
+
+.oppertunity {
+  color: aliceblue;
+  font-size: 4rem;
+}
+
+.lights {
+  display: flex;
+  gap: 3rem;
+  list-style: none;
+}
+
+.light-1 {
+  background-color: green;
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+.light-2 {
+  background-color: green;
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+.light-3 {
+  background-color: green;
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+.light-4 {
+  background-color: green;
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+.light-5 {
+  background-color: green;
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid black;
+  border-radius: 50%;
 }
