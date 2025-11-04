@@ -25,6 +25,7 @@ const radius = 250;
 let angle = 0; // زاویه فعلی
 let angularVelocity = 0;
 let lastTickSegment = 0;
+let pinShake = 0;
 let spining = false;
 
 const drawWheel = function () {
@@ -64,15 +65,14 @@ const drawWheel = function () {
   // نشانگر سمت راست
   ctx.fillStyle = "black";
   ctx.beginPath();
-  ctx.moveTo(cx * 2 - 50, cy);
+  ctx.moveTo(cx * 2 - 50, cy + pinShake);
   ctx.lineTo(cx * 2, cy + 25);
   ctx.lineTo(cx * 2, cy - 25);
   ctx.fill();
 
-  ctx.save();
   ctx.fillStyle = "rgb(41, 40, 40)";
   ctx.beginPath();
-  ctx.moveTo(cx * 2 - 30, cy);
+  ctx.moveTo(cx * 2 - 30, cy + pinShake);
   ctx.lineTo(cx * 2, cy + 15);
   ctx.lineTo(cx * 2, cy - 15);
   ctx.fill();
@@ -86,11 +86,12 @@ const animation = function () {
 
     const currentSegment = Math.floor((angle % (Math.PI * 2)) / segAngle);
     if (currentSegment !== lastTickSegment) {
-      // وارد بخش جدید شد صدای تیک زده بشه
       tickSound.currentTime = 0;
       tickSound.play();
-
+      pinShake = 5;
       lastTickSegment = currentSegment;
+    } else {
+      pinShake = 0;
     }
 
     if (Math.abs(angularVelocity) < 0.0001) {
