@@ -9,8 +9,8 @@ html {
 }
 
 body {
-  background-color: rgb(32, 32, 32);
-  margin: 5rem 0;
+  background-color: black;
+  /* margin: 5rem 0; */
 }
 
 .container {
@@ -22,8 +22,19 @@ body {
 
 .canvas {
   width: 80vb;
-  border: 10px solid rgb(0, 0, 0);
+  border: 10px solid rgb(32, 32, 32);
   border-radius: 100%;
+}
+
+.clock {
+  color: black;
+  background-color: rgba(240, 248, 255, 0.767);
+  font-size: 4rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 3rem 0;
+  padding: 5px;
+  border-radius: 20px;
+  box-shadow: 1px 1px 50px rgb(122, 122, 122);
 }
 
 .spin-btn {
@@ -31,8 +42,8 @@ body {
   height: 10rem;
   position: absolute;
   top: 40%;
-  transform: translate(0, -50%);
-  background-color: rgb(1, 6, 15);
+  transform: translate(0, 10%);
+  background-color: rgb(41, 40, 40);
   color: azure;
   border: none;
   font-size: 3rem;
@@ -51,7 +62,7 @@ body {
 }
 
 .spin-btn:hover {
-  background-color: rgb(41, 40, 40);
+  background-color: black;
 }
 
 .oppertunity {

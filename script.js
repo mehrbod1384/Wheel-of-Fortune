@@ -3,6 +3,7 @@
 const canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext("2d");
 const spinBtn = document.querySelector(".spin-btn");
+const clock = document.querySelector(".clock");
 const light1 = document.querySelector(".light-1");
 const light2 = document.querySelector(".light-2");
 const light3 = document.querySelector(".light-3");
@@ -35,6 +36,15 @@ let operrtunityLeft = 5;
 let noOperrtunity = false;
 let spining = false;
 
+// clock
+let date = new Date();
+let hour = `${date.getHours()}`.padStart(2, 0);
+let minute = `${date.getMinutes()}`.padStart(2, 0);
+let second = `${date.getSeconds()}`.padStart(2, 0);
+clock.textContent = `${hour}:${minute}:${second}`;
+
+////////////////////////////////
+// functions
 const drawWheel = function () {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -70,14 +80,14 @@ const drawWheel = function () {
   }
 
   // نشانگر سمت راست
-  ctx.fillStyle = "black";
+  ctx.fillStyle = "rgb(41, 40, 40)";
   ctx.beginPath();
   ctx.moveTo(cx * 2 - 50, cy + pinShake);
   ctx.lineTo(cx * 2, cy + 25);
   ctx.lineTo(cx * 2, cy - 25);
   ctx.fill();
 
-  ctx.fillStyle = "rgb(41, 40, 40)";
+  ctx.fillStyle = "black";
   ctx.beginPath();
   ctx.moveTo(cx * 2 - 30, cy + pinShake);
   ctx.lineTo(cx * 2, cy + 15);
@@ -109,8 +119,22 @@ const animation = function () {
     }
   }
 
+  showClock();
   drawWheel();
   requestAnimationFrame(animation);
+};
+
+const showClock = function () {
+  setInterval(() => {
+    date = new Date();
+    hour = `${date.getHours()}`.padStart(2, 0);
+    minute = `${date.getMinutes()}`.padStart(2, 0);
+    second = `${date.getSeconds()}`.padStart(2, 0);
+
+    const amOrPm = date.getHours() >= 12 ? "PM" : "AM";
+
+    clock.textContent = `${hour} : ${minute} : ${second} ${amOrPm}`;
+  });
 };
 
 const displayReward = function () {
@@ -162,13 +186,13 @@ const newGame = function () {
 };
 
 spinBtn.addEventListener("click", function () {
-  if (Math.abs(angularVelocity) < 0.0001) {
+  if (spining === false) {
     oppertunityLights();
 
     newGame();
 
     if (!spining) {
-      angularVelocity = Math.random() * (0.2 - 0.1) + 0.01; // سرعت اولیه
+      angularVelocity = Math.random() * (0.2 - 0.1) + 0.1; // سرعت اولیه
       spining = true;
     }
   }
